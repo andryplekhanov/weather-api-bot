@@ -10,6 +10,7 @@ from tgbot.filters.admin import AdminFilter
 from tgbot.handlers.admin import register_admin
 from tgbot.handlers.echo import register_echo
 from tgbot.handlers.help import register_help
+from tgbot.handlers.other_city_weather import register_other_city_weather
 from tgbot.handlers.set_location import register_set_location
 from tgbot.handlers.user import register_user
 from tgbot.middlewares.environment import EnvironmentMiddleware
@@ -31,6 +32,7 @@ def register_all_handlers(dp):
     register_user(dp)
     register_help(dp)
     register_set_location(dp)
+    register_other_city_weather(dp)
 
     register_echo(dp)
 
