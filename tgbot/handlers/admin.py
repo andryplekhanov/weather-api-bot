@@ -1,8 +1,10 @@
 from aiogram import Dispatcher
+from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
 
 
-async def admin_start(message: Message):
+async def admin_start(message: Message, state: FSMContext):
+    await state.finish()
     await message.reply("Hello, admin!")
 
 
