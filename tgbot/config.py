@@ -20,7 +20,10 @@ class TgBot:
 
 @dataclass
 class Miscellaneous:
-    other_params: str = None
+    geocoder_key: str
+    geocoder_url: str
+    weather_key: str
+    weather_url: str
 
 
 @dataclass
@@ -46,5 +49,10 @@ def load_config(path: str = None):
             user=env.str('DB_USER'),
             database=env.str('DB_NAME')
         ),
-        misc=Miscellaneous()
+        misc=Miscellaneous(
+            geocoder_key=env.str("GEOCODER"),
+            geocoder_url=env.str("GEOCODER_URL"),
+            weather_key=env.str("YANDEX_WEATHER"),
+            weather_url=env.str("YANDEX_WEATHER_URL"),
+        )
     )
