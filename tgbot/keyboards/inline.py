@@ -5,13 +5,6 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from tgbot.services.factories import for_city
 
 
-def process_text(text):
-    new_text = text
-    if len(text.encode()) > 20:
-        new_text = text[:19]
-    return new_text
-
-
 def print_cities(cities_list: List[Tuple]) -> InlineKeyboardMarkup:
     """
     Клавиатура с кнопками - выбор подходящего по названию города, из которых пользователь выбирает нужный ему.
@@ -21,10 +14,7 @@ def print_cities(cities_list: List[Tuple]) -> InlineKeyboardMarkup:
 
     keyboard = InlineKeyboardMarkup()
     for data in cities_list:
-        if (len(data[0].encode()) + len(data[2].encode())) > 60:
-            city_name = process_text(data[0])
-        else:
-            city_name = data[0]
+        city_name = data[0][:19]
         keyboard.add(InlineKeyboardButton(text=f'{city_name} ({data[1]})',
                                           callback_data=for_city.new(city_geo=data[2], city_name=city_name)
                                           ))
