@@ -3,7 +3,7 @@ from requests.models import Response
 from typing import Dict, Union
 
 
-def request_to_api(url: str, querystring: Dict, headers: Union[Dict, None] = None) -> Union[Response, None]:
+async def request_to_api(url: str, querystring: Dict, headers: Union[Dict, None] = None) -> Union[Response, None]:
     """
     Функция осуществляет get-запрос к api. Если ответ == 200: возвращает результат, иначе None.
     :param url: строка с энд-пойнтом для запроса.

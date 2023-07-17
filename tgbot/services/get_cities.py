@@ -1,15 +1,15 @@
 import json
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Union
 
 from tgbot.config import Config
 from tgbot.services.api_request import request_to_api
 
 
-def parse_cities_group(city: str, config: Config) -> List[Tuple]:
+async def parse_cities_group(city: str, config: Config) -> Union[List[Tuple], None]:
     url = config.misc.geocoder_url
     apikey = config.misc.geocoder_key
     querystring = {'geocode': city, 'apikey': apikey, 'format': 'json'}
-    response = request_to_api(url=url, querystring=querystring)
+    response = await request_to_api(url=url, querystring=querystring)
     if response:
         cities = list()
         try:

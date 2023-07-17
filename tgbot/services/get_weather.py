@@ -3,12 +3,12 @@ from datetime import datetime
 from tgbot.services.api_request import request_to_api
 
 
-def get_weather(coordinates, config):
+async def get_weather(coordinates, config):
     coordinates = coordinates.split()
     url = config.misc.weather_url
     querystring = {'lat': coordinates[1], 'lon': coordinates[0], 'lang': 'ru_RU'}
     headers = {'X-Yandex-API-Key': config.misc.weather_key}
-    response = request_to_api(url=url, querystring=querystring, headers=headers)
+    response = await request_to_api(url=url, querystring=querystring, headers=headers)
     if response:
         try:
             result = json.loads(response.text)
@@ -18,7 +18,7 @@ def get_weather(coordinates, config):
     return None
 
 
-def get_weather_result(weather_data):
+async def get_weather_result(weather_data):
     weather = dict()
     weather['location'] = weather_data.get('geo_object').get('locality').get('name')
     weather['now'] = {

@@ -14,7 +14,7 @@ from tgbot.services.ready_for_answer import get_current_weather_str, get_week_we
 
 async def get_cities_group(message: Message, config: Config, state: FSMContext):
     answer = message.text
-    cities_list = parse_cities_group(city=answer, config=config)
+    cities_list = await parse_cities_group(city=answer, config=config)
     if cities_list:
         await message.answer("Пожалуйста, уточните:", reply_markup=print_cities(cities_list))
     else:
@@ -36,8 +36,8 @@ async def clarify_city(call: CallbackQuery, callback_data: dict, state: FSMConte
     #                             city_geo=city_geo,
     #                             user_id=call.message.chat.id)
 
-    weather_data = get_weather(coordinates=callback_data.get('city_geo'), config=config)
-    weather_result = get_weather_result(weather_data)
+    weather_data = await get_weather(coordinates=callback_data.get('city_geo'), config=config)
+    weather_result = await get_weather_result(weather_data)
     reply_str = await get_current_weather_str(weather_result)
     await call.message.answer(reply_str, reply_markup=show_forecast_callback())
     await call.answer(cache_time=15)
