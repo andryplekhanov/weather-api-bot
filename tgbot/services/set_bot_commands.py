@@ -7,7 +7,6 @@ DEFAULT_COMMANDS = (
     ('my_city_weather', "Погода в моём городе"),
     ('other_city_weather', "Погода в другом городе"),
     ('set_location', "Установить свой город"),
-    ('history', "История поиска")
 )
 
 
