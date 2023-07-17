@@ -13,6 +13,7 @@ from tgbot.handlers.help import register_help
 from tgbot.handlers.my_city_weather import register_my_city_weather
 from tgbot.handlers.other_city_weather import register_other_city_weather
 from tgbot.handlers.set_location import register_set_location
+from tgbot.handlers.survey import register_survey
 from tgbot.handlers.user import register_user
 from tgbot.middlewares.environment import EnvironmentMiddleware
 from tgbot.services.set_bot_commands import set_default_commands
@@ -35,6 +36,7 @@ def register_all_handlers(dp):
     register_set_location(dp)
     register_other_city_weather(dp)
     register_my_city_weather(dp)
+    register_survey(dp)
 
     register_echo(dp)
 
