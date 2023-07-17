@@ -8,14 +8,7 @@ from tgbot.services.factories import for_city
 def process_text(text):
     new_text = text
     if len(text.encode()) > 20:
-        result = []
-        for word in text.split(' '):
-            if word.istitle():
-                result.append(word)
-        if len(result) < 2:
-            new_text = result[0]
-        else:
-            new_text = f'{result[0][:1]}. {result[1]}'
+        new_text = text[:19]
     return new_text
 
 
