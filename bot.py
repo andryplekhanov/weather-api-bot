@@ -17,6 +17,7 @@ from tgbot.handlers.set_location import register_set_location
 from tgbot.handlers.survey import register_survey
 from tgbot.handlers.user import register_user
 from tgbot.middlewares.environment import EnvironmentMiddleware
+from tgbot.models.models import Base
 from tgbot.services.set_bot_commands import set_default_commands
 
 logger = logging.getLogger(__name__)
@@ -59,6 +60,8 @@ async def main():
 
     # Creating DB connections pool
     db_pool = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+    async with engine.begin() as con:
+        await con.run_sync(Base.metadata.create_all)
 
     storage = RedisStorage2() if config.tg_bot.use_redis else MemoryStorage()
     bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
