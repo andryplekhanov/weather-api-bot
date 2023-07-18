@@ -1,10 +1,14 @@
 FROM python:3.9-buster
-WORKDIR /src
 
-COPY requirements.txt /src
+ENV BOT_NAME=$BOT_NAME
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-RUN apt-get update
+WORKDIR /app/$BOT_NAME
 
-COPY . /src
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir --upgrade pip  \
+    && pip install --no-cache-dir -r ./requirements.txt
+
+COPY . .
+
+CMD ["python", "bot.py"]
