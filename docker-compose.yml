@@ -3,18 +3,18 @@
 version: '3.9'
 
 services:
-#  bot:
-#    build: .
-#    container_name: ${BOT_CONTAINER_NAME}
-#    stop_signal: SIGINT
-#    volumes:
-#      - ./logs:/app/logs
-#    restart: always
-#    env_file:
-#      - ./.env
-#    depends_on:
-#      db:
-#        condition: service_healthy
+  bot:
+    build: .
+    container_name: ${BOT_CONTAINER_NAME}
+    stop_signal: SIGINT
+    volumes:
+      - ./logs:/app/logs
+    restart: always
+    env_file:
+      - ./.env
+    depends_on:
+      db:
+        condition: service_healthy
 
   db:
     container_name: db_weather
@@ -55,7 +55,6 @@ services:
       POSTGRES_PASSWORD: "123456qwerty"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
-      - ../2. Init Database:/docker-entrypoint-initdb.d
       - weatherdb-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
