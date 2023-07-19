@@ -45,11 +45,11 @@ def load_config(path: str = None):
             use_redis=env.bool("USE_REDIS"),
         ),
         db=DbConfig(
-            host=env.str('DB_HOST'),
-            password=env.str('DB_PASSWORD'),
-            user=env.str('DB_USER'),
-            name=env.str('DB_NAME'),
-            port=env.str('DB_PORT')
+            host=env.str('POSTGRES_HOST'),
+            password=env.str('POSTGRES_PASSWORD'),
+            user=env.str('POSTGRES_USER'),
+            name=env.str('POSTGRES_DB'),
+            port=env.str('POSTGRES_PORT')
         ),
         misc=Miscellaneous(
             geocoder_key=env.str("GEOCODER"),
