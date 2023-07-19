@@ -8,7 +8,8 @@ class DbConfig:
     host: str
     password: str
     user: str
-    database: str
+    name: str
+    port: str
 
 
 @dataclass
@@ -45,9 +46,10 @@ def load_config(path: str = None):
         ),
         db=DbConfig(
             host=env.str('DB_HOST'),
-            password=env.str('DB_PASS'),
+            password=env.str('DB_PASSWORD'),
             user=env.str('DB_USER'),
-            database=env.str('DB_NAME')
+            name=env.str('DB_NAME'),
+            port=env.str('DB_PORT')
         ),
         misc=Miscellaneous(
             geocoder_key=env.str("GEOCODER"),
