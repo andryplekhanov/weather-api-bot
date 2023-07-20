@@ -35,6 +35,7 @@ async def clarify_city(call: CallbackQuery, callback_data: dict, state: FSMConte
                                 city_name=city_name,
                                 city_geo=city_geo,
                                 user_id=call.message.chat.id)
+        await call.message.answer(f'Город "{city_name}" установлен')
 
     weather_data = await get_weather(coordinates=callback_data.get('city_geo'), config=config)
     weather_result = await get_weather_result(weather_data)
