@@ -5,7 +5,7 @@ from aiogram.types import CallbackQuery, Message
 from tgbot.config import Config
 from tgbot.keyboards.inline import print_cities, show_forecast_callback, show_prev_next_callback
 from tgbot.misc.states import UsersInfo
-# from tgbot.models import orm
+from tgbot.models import orm
 from tgbot.services.factories import for_city
 from tgbot.services.get_cities import parse_cities_group
 from tgbot.services.get_weather import get_weather, get_weather_result
@@ -27,14 +27,14 @@ async def clarify_city(call: CallbackQuery, callback_data: dict, state: FSMConte
         data['city_geo'] = callback_data.get('city_geo')
         data['city_name'] = callback_data.get('city_name')
 
-    # states = await state.get_data()
-    # city_name = states.get('city_name')
-    # city_geo = states.get('city_geo')
-    # if states.get('last_command') == 'set_location':
-    #     await orm.set_user_city(async_session=call.message.bot.get('db'),
-    #                             city_name=city_name,
-    #                             city_geo=city_geo,
-    #                             user_id=call.message.chat.id)
+    states = await state.get_data()
+    if states.get('last_command') == 'set_location':
+        city_name = states.get('city_name')
+        city_geo = states.get('city_geo')
+        await orm.set_user_city(async_session=call.message.bot.get('db'),
+                                city_name=city_name,
+                                city_geo=city_geo,
+                                user_id=call.message.chat.id)
 
     weather_data = await get_weather(coordinates=callback_data.get('city_geo'), config=config)
     weather_result = await get_weather_result(weather_data)
