@@ -11,7 +11,6 @@ async def add_user(async_session, user_id):
     async with async_session() as session:
         user = await session.execute(select(User).where(User.tg_id == user_id))
         all_users = user.scalars().all()
-        # logger.info(f"Users: {all_users}")
 
         if str(user_id) not in list(map(str, all_users)):
             new_user = User(tg_id=user_id)
