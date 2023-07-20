@@ -33,12 +33,13 @@ async def get_week_weather_list(weather_result: dict) -> list:
     result_list = []
     for data in weather_result.get('forecasts'):
         result_list.append(f"📆 <b>{data.get('date')}</b>\n"
-                           f"<b>Ночь</b>: {data.get('temperature_night')}° "
-                           f"({CONDITIONS[data.get('condition_night')]})\n"
+                           f"<b>Утро</b>: {data.get('temperature_morning')}° "
+                           f"({CONDITIONS[data.get('condition_morning')]})"
                            f"<b>День</b>: {data.get('temperature_day')}° "
                            f"({CONDITIONS[data.get('condition_day')]})\n"
                            f"<b>Вечер</b>: {data.get('temperature_evening')}° "
                            f"({CONDITIONS[data.get('condition_evening')]})\n"
-                           f"<b>Утро</b>: {data.get('temperature_morning')}° "
-                           f"({CONDITIONS[data.get('condition_morning')]})")
+                           f"<b>Ночь</b>: {data.get('temperature_night')}° "
+                           f"({CONDITIONS[data.get('condition_night')]})\n"
+                           )
     return result_list
